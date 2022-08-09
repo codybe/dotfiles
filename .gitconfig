@@ -1,0 +1,42 @@
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+  ui = auto
+[user]
+    name = Cody Bellitto
+    email = cbellitto@zappos.com
+[core]
+    pager = less -x4
+[help]
+    autocorrect = 1
+[alias]
+    cp  = cherry-pick
+    scf = diff-tree --no-commit-id --name-only -r
+    re  = rebase
+    lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(bold blue)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset - %s' --abbrev-commit --date=relative
+    st = status --short --branch
+    aa = add .
+
+    # force pushes but only if you have all the commits upstream
+    please = push --force-with-lease
+
+    # use to add files you forgot to stage to the last (unpushed) commit without making another commit
+    # just git add the file and then run git commend
+    commend = commit --amend --no-edit
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+    squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+[push]
+    default = simple
+    rebase = false
+    ff = only
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+[init]
+  defaultBranch = mainline
+[pull]
+	rebase = false
